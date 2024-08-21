@@ -1,0 +1,24 @@
+Hound - Information Gathering Report
+------------------------------------
+
+Device Information
+----------------------------
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0 
+Platform: Win32 
+Cookies Enabled: true
+Browser Language: en-US
+Browser Name: Netscape
+Browser CodeName: Mozilla
+RAM: undefined
+CPU Cores: 8
+Screen Width: 1536
+Screen Height: 864
+Local Time: 12:01:58 AM
+RefUrl: 
+OS CPU: Windows NT 10.0; Win64; x64
+-------------------------
+
+Target IP Detail
+----------------
+IP: 49.35.250.174
+---------------

